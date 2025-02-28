@@ -1,0 +1,261 @@
+# //  Questa Intel Starter FPGA Edition-64
+# //  Version 2023.3 linux_x86_64 Jul 17 2023
+# //
+# //  Copyright 1991-2023 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  QuestaSim and its associated documentation contain trade
+# //  secrets and commercial or financial information that are the property of
+# //  Mentor Graphics Corporation and are privileged, confidential,
+# //  and exempt from disclosure under the Freedom of Information Act,
+# //  5 U.S.C. Section 552. Furthermore, this information
+# //  is prohibited from disclosure under the Trade Secrets Act,
+# //  18 U.S.C. Section 1905.
+# //
+# do practica2ffd_run_msim_gate_vhdl.do
+# if {[file exists gate_work]} {
+# 	vdel -lib gate_work -all
+# }
+# vlib gate_work
+# vmap work gate_work
+# Questa Intel Starter FPGA Edition-64 vmap 2023.3 Lib Mapping Utility 2023.07 Jul 17 2023
+# vmap work gate_work 
+# Copying /home/tohka/intelFPGA_lite/23.1std/questa_fse/linux_x86_64/../modelsim.ini to modelsim.ini
+# Modifying modelsim.ini
+# 
+# vcom -93 -work work {practica2ffd.vho}
+# Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
+# Start time: 15:52:38 on Feb 25,2025
+# vcom -reportprogress 300 -93 -work work practica2ffd.vho 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package VITAL_Timing
+# -- Loading package VITAL_Primitives
+# -- Loading package fiftyfivenm_atom_pack
+# -- Loading package fiftyfivenm_components
+# -- Compiling entity hard_block
+# -- Compiling architecture structure of hard_block
+# -- Loading package dffeas_pack
+# -- Loading package altera_primitives_components
+# -- Compiling entity practica2ffd
+# -- Compiling architecture structure of practica2ffd
+# End time: 15:52:38 on Feb 25,2025, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# 
+# 
+# stdin: <EOF>
+vcom -93 -work work /home/tohka/FIUNAM/LaboratorioOAC2025-2/Practica02/E01/simulation/questa/practica2ffd.vho
+# Questa Intel Starter FPGA Edition-64 vcom 2023.3 Compiler 2023.07 Jul 17 2023
+# Start time: 15:53:08 on Feb 25,2025
+# vcom -reportprogress 300 -93 -work work /home/tohka/FIUNAM/LaboratorioOAC2025-2/Practica02/E01/simulation/questa/practica2ffd.vho 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package VITAL_Timing
+# -- Loading package VITAL_Primitives
+# -- Loading package fiftyfivenm_atom_pack
+# -- Loading package fiftyfivenm_components
+# -- Compiling entity hard_block
+# -- Compiling architecture structure of hard_block
+# -- Loading package dffeas_pack
+# -- Loading package altera_primitives_components
+# -- Compiling entity practica2ffd
+# -- Compiling architecture structure of practica2ffd
+# End time: 15:53:08 on Feb 25,2025, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vsim -voptargs=+acc work.practica2ffd
+# vsim -voptargs="+acc" work.practica2ffd 
+# Start time: 15:53:11 on Feb 25,2025
+# ** Note: (vsim-3812) Design is being optimized...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.vital_timing(body)
+# Loading ieee.vital_primitives(body)
+# Loading altera.dffeas_pack
+# Loading altera.altera_primitives_components
+# Loading fiftyfivenm.fiftyfivenm_atom_pack(body)
+# Loading fiftyfivenm.fiftyfivenm_components
+# Loading work.practica2ffd(structure)#1
+# Loading work.hard_block(structure)#1
+# Loading fiftyfivenm.fiftyfivenm_lcell_comb(vital_lcell_comb)#1
+# Loading fiftyfivenm.fiftyfivenm_io_obuf(behavior)#1
+# Loading fiftyfivenm.fiftyfivenm_io_ibuf(behavior)#1
+# Loading fiftyfivenm.fiftyfivenm_clkctrl(vital_clkctrl)#1
+# Loading fiftyfivenm.fiftyfivenm_ena_reg(behave)#1
+# Loading fiftyfivenm.fiftyfivenm_lcell_comb(vital_lcell_comb)#2
+# Loading fiftyfivenm.fiftyfivenm_lcell_comb(vital_lcell_comb)#3
+# Loading fiftyfivenm.fiftyfivenm_lcell_comb(vital_lcell_comb)#4
+# Loading fiftyfivenm.fiftyfivenm_lcell_comb(vital_lcell_comb)#5
+# Loading fiftyfivenm.fiftyfivenm_lcell_comb(vital_lcell_comb)#6
+# Loading altera.dffeas(vital_dffeas)#1
+# Loading fiftyfivenm.fiftyfivenm_lcell_comb(vital_lcell_comb)#7
+# Loading fiftyfivenm.fiftyfivenm_lcell_comb(vital_lcell_comb)#8
+# Loading fiftyfivenm.fiftyfivenm_lcell_comb(vital_lcell_comb)#9
+# Loading fiftyfivenm.fiftyfivenm_lcell_comb(vital_lcell_comb)#10
+# Loading fiftyfivenm.fiftyfivenm_lcell_comb(vital_lcell_comb)#11
+# Loading fiftyfivenm.fiftyfivenm_lcell_comb(vital_lcell_comb)#12
+# Loading fiftyfivenm.fiftyfivenm_lcell_comb(vital_lcell_comb)#13
+# Loading fiftyfivenm.fiftyfivenm_lcell_comb(vital_lcell_comb)#14
+# Loading altera.dffeas(vital_dffeas)#3
+# Loading fiftyfivenm.fiftyfivenm_lcell_comb(vital_lcell_comb)#15
+# Loading fiftyfivenm.fiftyfivenm_unvm(behavior)#1
+# Loading fiftyfivenm.fiftyfivenm_adcblock(behavior)#1
+# Loading fiftyfivenm.fiftyfivenm_adcblock(behavior)#2
+# ** Fatal: (vsim-3693) The minimum time resolution limit (1ps) in the Verilog source is smaller than the one chosen for SystemC or VHDL units in the design. Use the vsim -t option to specify the desired resolution.
+# FATAL ERROR while loading design
+# Error loading design
+# End time: 15:53:13 on Feb 25,2025, Elapsed time: 0:00:02
+# Errors: 1, Warnings: 1
+vsim -voptargs=+acc work.practica2ffd -t 10ns
+# vsim -voptargs="+acc" work.practica2ffd -t 10ns 
+# Start time: 15:53:29 on Feb 25,2025
+# ** Note: (vsim-8009) Loading existing optimized design _opt
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.vital_timing(body)
+# ** Warning: (vsim-3479) Time unit 'ns' is less than the simulator resolution (10ns).
+#    Time: 0 ns  Iteration: 0  Root: /
+# Loading ieee.vital_primitives(body)
+# Loading altera.dffeas_pack
+# Loading altera.altera_primitives_components
+# Loading fiftyfivenm.fiftyfivenm_atom_pack(body)
+# Loading fiftyfivenm.fiftyfivenm_components
+# Loading work.practica2ffd(structure)#1
+# Loading work.hard_block(structure)#1
+# Loading fiftyfivenm.fiftyfivenm_lcell_comb(vital_lcell_comb)#1
+# Loading fiftyfivenm.fiftyfivenm_io_obuf(behavior)#1
+# Loading fiftyfivenm.fiftyfivenm_io_ibuf(behavior)#1
+# Loading fiftyfivenm.fiftyfivenm_clkctrl(vital_clkctrl)#1
+# Loading fiftyfivenm.fiftyfivenm_ena_reg(behave)#1
+# Loading fiftyfivenm.fiftyfivenm_lcell_comb(vital_lcell_comb)#2
+# Loading fiftyfivenm.fiftyfivenm_lcell_comb(vital_lcell_comb)#3
+# Loading fiftyfivenm.fiftyfivenm_lcell_comb(vital_lcell_comb)#4
+# Loading fiftyfivenm.fiftyfivenm_lcell_comb(vital_lcell_comb)#5
+# Loading fiftyfivenm.fiftyfivenm_lcell_comb(vital_lcell_comb)#6
+# Loading altera.dffeas(vital_dffeas)#1
+# Loading fiftyfivenm.fiftyfivenm_lcell_comb(vital_lcell_comb)#7
+# Loading fiftyfivenm.fiftyfivenm_lcell_comb(vital_lcell_comb)#8
+# Loading fiftyfivenm.fiftyfivenm_lcell_comb(vital_lcell_comb)#9
+# Loading fiftyfivenm.fiftyfivenm_lcell_comb(vital_lcell_comb)#10
+# Loading fiftyfivenm.fiftyfivenm_lcell_comb(vital_lcell_comb)#11
+# Loading fiftyfivenm.fiftyfivenm_lcell_comb(vital_lcell_comb)#12
+# Loading fiftyfivenm.fiftyfivenm_lcell_comb(vital_lcell_comb)#13
+# Loading fiftyfivenm.fiftyfivenm_lcell_comb(vital_lcell_comb)#14
+# Loading altera.dffeas(vital_dffeas)#3
+# Loading fiftyfivenm.fiftyfivenm_lcell_comb(vital_lcell_comb)#15
+# Loading fiftyfivenm.fiftyfivenm_unvm(behavior)#1
+# Loading fiftyfivenm.fiftyfivenm_adcblock(behavior)#1
+# Loading fiftyfivenm.fiftyfivenm_adcblock(behavior)#2
+add wave -position insertpoint  \
+sim:/practica2ffd/S0 \
+sim:/practica2ffd/Reset \
+sim:/practica2ffd/clk \
+sim:/practica2ffd/E1 \
+sim:/practica2ffd/E2 \
+sim:/practica2ffd/S1 \
+sim:/practica2ffd/Q0_Out \
+sim:/practica2ffd/Q1_Out
+# Can't move the Now cursor.
+force -freeze sim:/practica2ffd/clk 1 0, 0 {50 ns} -r 100
+restart
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+force -freeze sim:/practica2ffd/Reset 1 0
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+force -freeze sim:/practica2ffd/E2 0 0
+force -freeze sim:/practica2ffd/E1 0 0
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+force -freeze sim:/practica2ffd/clk 1 0, 0 {5 ns} -r 10
+# ** UI-Msg (Warning): (vsim-168) The time value, 5 ns, is smaller than the simulator resolution so no run occurred.
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+# End time: 15:56:43 on Feb 25,2025, Elapsed time: 0:03:14
+# Errors: 0, Warnings: 1
