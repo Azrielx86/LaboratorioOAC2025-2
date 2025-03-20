@@ -75,9 +75,9 @@ set_location_assignment PIN_B10 -to outputs[3]
 set_location_assignment PIN_A10 -to outputs[2]
 set_location_assignment PIN_A9 -to outputs[1]
 set_location_assignment PIN_A8 -to outputs[0]
-set_location_assignment PIN_D14 -to estados[2]
+set_location_assignment PIN_B11 -to estados[2]
 set_location_assignment PIN_A11 -to estados[1]
-set_location_assignment PIN_B11 -to estados[0]
+set_location_assignment PIN_D14 -to estados[0]
 set_global_assignment -name TIMING_ANALYZER_MULTICORNER_ANALYSIS ON
 set_global_assignment -name NUM_PARALLEL_PROCESSORS ALL
 set_global_assignment -name ENABLE_OCT_DONE OFF
