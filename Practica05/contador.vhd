@@ -16,12 +16,12 @@ end contador;
 architecture arqcontador of contador is
   signal edo_pres : std_logic_vector(2 downto 0) := "000";
 begin
-  process (reset, clk, liga)
+  process (reset, clk, liga, edo_pres)
   begin
     if reset = '0' then
       edo_pres <= "000";
     elsif rising_edge(clk) then
-      if incrementa <= '1' then
+      if incrementa = '1' then
         edo_pres      <= edo_pres + 1;
       elsif carga = '1' then
         edo_pres <= liga;

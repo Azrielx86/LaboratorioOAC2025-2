@@ -30,25 +30,25 @@ architecture arqmain of main is
   signal x    : std_logic := '0';
   signal z    : std_logic := '0';
   signal qsel : std_logic := '0';
-
-  -- salidas
 begin
-  clk_low <= clk;
-  -- div_freq : entity work.divisor(arqdivf)
-  --   port map
-  --   (
-  --     clk, clk_low
-  --   );
+  div_freq : entity work.divisor(arqdivf)
+    port map
+    (
+      clk, clk_low
+    );
+
   memory : entity work.memory(arqmem)
     port map
     (
       direccion, prueba, vf, liga, salidas_paso, salidas_salto
     );
+
   contador : entity work.contador(arqcontador)
     port map
     (
       reset, clk_low, liga, incrementa, carga, direccion
     );
+
   mux_inputs : entity work.mux_inputs
     port map
     (

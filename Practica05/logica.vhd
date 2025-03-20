@@ -16,7 +16,7 @@ architecture Behavioral of logica is
   signal xor_result : std_logic := '0';
 
 begin
-  process (vf, qsel)
+  process (vf, qsel, xor_result)
   begin
     xor_result <= vf xor qsel;
     carga      <= not xor_result;

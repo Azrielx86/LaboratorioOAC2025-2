@@ -37,7 +37,7 @@ begin
       when "011" =>
         qsel <= z;
       when "100" =>
-        qsel <= '0';
+        qsel <= '0'; -- Q_aux
       when others =>
         qsel <= '0';
     end case;
