@@ -59,12 +59,6 @@ set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
-set_global_assignment -name VHDL_FILE main.vhd
-set_global_assignment -name VHDL_FILE mux_inputs.vhd
-set_global_assignment -name VHDL_FILE logica.vhd
-set_global_assignment -name VHDL_FILE contador.vhd
-set_global_assignment -name VHDL_FILE memory.vhd
-set_global_assignment -name VHDL_FILE divisor.vhd
 set_location_assignment PIN_P11 -to clk
 set_location_assignment PIN_B8 -to reset
 set_location_assignment PIN_C10 -to inputs[3]
@@ -88,6 +82,15 @@ set_global_assignment -name OUTPUT_IO_TIMING_NEAR_END_VMEAS "HALF VCCIO" -rise
 set_global_assignment -name OUTPUT_IO_TIMING_NEAR_END_VMEAS "HALF VCCIO" -fall
 set_global_assignment -name OUTPUT_IO_TIMING_FAR_END_VMEAS "HALF SIGNAL SWING" -rise
 set_global_assignment -name OUTPUT_IO_TIMING_FAR_END_VMEAS "HALF SIGNAL SWING" -fall
-set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
 set_global_assignment -name ALLOW_REGISTER_RETIMING ON
 set_global_assignment -name OPTIMIZATION_MODE BALANCED
+set_global_assignment -name VHDL_FILE regmap.vhd
+set_global_assignment -name VHDL_FILE regint.vhd
+set_global_assignment -name VHDL_FILE secuenciador.vhd
+set_global_assignment -name VHDL_FILE main.vhd
+set_global_assignment -name VHDL_FILE mux_inputs.vhd
+set_global_assignment -name VHDL_FILE logica.vhd
+set_global_assignment -name VHDL_FILE contador.vhd
+set_global_assignment -name VHDL_FILE memory.vhd
+set_global_assignment -name VHDL_FILE divisor.vhd
+set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

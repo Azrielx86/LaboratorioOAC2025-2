@@ -15,9 +15,9 @@ Conectar _y_ en a el __Registro de Transformación__ y al __Registro de interrup
 
 if VECT = '0' then
   if EST07 then
-    D <= EST7;
+    D <= EST8;
   elsif EST9 then
-    D <= EST9
+    D <= EST10
   endif;
 endif;
 

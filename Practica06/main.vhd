@@ -7,82 +7,88 @@ entity main is
   port (
     clk     : in std_logic;
     reset   : in std_logic;
-    inputs  : in std_logic_vector(3 downto 0);
-    outputs : out std_logic_vector(3 downto 0);
+    inputs  : in std_logic_vector(2 downto 0);
+    outputs : out std_logic_vector(5 downto 0);
     estados : out std_logic_vector(2 downto 0)
   );
 end main;
 
 architecture arqmain of main is
-  signal clk_low       : std_logic                    := '0';
-  signal direccion     : std_logic_vector(2 downto 0) := "000";
-  signal prueba        : std_logic_vector(2 downto 0) := "000";
-  signal liga          : std_logic_vector(2 downto 0) := "000";
-  signal vf            : std_logic                    := '0';
-  signal salidas_paso  : std_logic_vector(3 downto 0) := "0000";
-  signal salidas_salto : std_logic_vector(3 downto 0) := "0000";
-  signal incrementa    : std_logic                    := '0';
-  signal carga         : std_logic                    := '0';
+  -- signal clk_low    : std_logic                    := '0';
+  signal direccion : std_logic_vector(3 downto 0) := "0000";
+  signal prueba    : std_logic_vector(1 downto 0) := "00";
+  signal liga      : std_logic_vector(3 downto 0) := "0000";
+  signal mi        : std_logic_vector(1 downto 0) := "00";
+  signal vf        : std_logic                    := '0';
+  signal salidas_t : std_logic_vector(5 downto 0) := "000000";
+  signal salidas_f : std_logic_vector(5 downto 0) := "000000";
+
+  signal cc    : std_logic := '0';
+  signal mapb  : std_logic := '0';
+  signal plb   : std_logic := '0';
+  signal vectb : std_logic := '0';
+
+  signal dir : std_logic_vector(3 downto 0) := "0000";
+
+  -- signal incrementa : std_logic                    := '0';
+  -- signal carga      : std_logic                    := '0';
 
   -- Entradas
-  signal v    : std_logic := '0';
-  signal w    : std_logic := '0';
   signal x    : std_logic := '0';
-  signal z    : std_logic := '0';
+  signal y    : std_logic := '0';
+  signal int  : std_logic := '0';
   signal qsel : std_logic := '0';
 begin
-  div_freq : entity work.divisor(arqdivf)
+  memory_inst : entity work.memory
     port map
     (
-      clk, clk_low
+      direction => direccion,
+      prueba    => prueba,
+      vf        => vf,
+      mi        => mi,
+      liga      => liga,
+      salidas_t => salidas_t,
+      salidas_f => salidas_f
     );
 
-  memory : entity work.memory(arqmem)
+  mux_inputs_inst : entity work.mux_inputs
     port map
     (
-      direccion, prueba, vf, liga, salidas_paso, salidas_salto
+      prueba => prueba,
+      x      => x,
+      y      => y,
+      int    => int,
+      qsel   => qsel
     );
 
-  contador : entity work.contador(arqcontador)
+  regmap_inst : entity work.regmap
     port map
     (
-      reset, clk_low, liga, incrementa, carga, direccion
+      mapb   => mapb,
+      in_dir => direccion,
+      dir    => dir
     );
 
-  mux_inputs : entity work.mux_inputs
+  secuenciador_inst : entity work.secuenciador
+    generic map(
+      dir_size    => 3,
+      default_dir => "0000"
+    )
     port map
     (
-      prueba,
-      v,
-      w,
-      x,
-      z,
-      qsel
+      clk      => clk,
+      reset    => reset,
+      cc       => cc,
+      dir      => dir,
+      next_dir => direccion,
+      i_ctrl   => mi,
+      plb      => plb,
+      mapb     => mapb,
+      vectb    => vectb
     );
 
-  logica_inst : entity work.logica
-    port map
-    (
-      vf,
-      qsel,
-      carga,
-      incrementa
-    );
-  process (inputs, clk_low, direccion)
+  process (qsel, vf)
   begin
-    v       <= inputs(0);
-    w       <= inputs(1);
-    x       <= inputs(2);
-    z       <= inputs(3);
-    estados <= direccion;
-    if rising_edge(clk_low) then
-      if carga = '1' then
-        outputs <= salidas_salto;
-      elsif incrementa = '1' then
-        outputs <= salidas_paso;
-      else
-        outputs <= "0000";
-      end if;
-    end if;
+    cc <= qsel xnor vf;
   end process;
 end arqmain;
