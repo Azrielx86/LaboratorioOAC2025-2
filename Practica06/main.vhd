@@ -103,7 +103,6 @@ begin
     (
       vectb  => vectb,
       in_dir => direccion,
-      int    => int,
       dir    => buffer_dir
     );
 

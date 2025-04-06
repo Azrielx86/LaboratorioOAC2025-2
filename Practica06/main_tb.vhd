@@ -76,15 +76,10 @@ begin
     (
       vectb  => vectb,
       in_dir => direccion,
-      int    => qsel,
       dir    => buffer_dir
     );
 
   secuenciador_inst : entity work.secuenciador
-    -- generic map(
-    --   dir_size    => 3,
-    --   default_dir => "0000"
-    -- )
     port map
     (
       clk      => clk,
@@ -124,13 +119,14 @@ begin
   process
   begin
     reset  <= '0';
-    inputs <= "000";
+    inputs <= "100";
+    map_inputs <= "00";
     wait for 20 ps;
     reset <= '1';
     wait for 3 ps;
-    inputs <= "001";
+    inputs <= "101";
     wait for 30 ps;
-    inputs <= "010";
+    inputs <= "110";
     wait;
   end process;
 

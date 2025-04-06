@@ -78,10 +78,10 @@ begin
         salidas_t <= "010000";
         salidas_f <= "010000";
       when "0101" => -- E05
-        prueba    <= "10";
+        prueba    <= "01";
         vf        <= '0';
         mi        <= "01";
-        liga_tmp  <= "0000";
+        liga_tmp  <= "1010";
         salidas_t <= "110010";
         salidas_f <= "010010";
       when "0110" => -- E6
@@ -93,7 +93,7 @@ begin
         salidas_f <= "001001";
       when "0111" => -- E7
         prueba    <= "10";
-        vf        <= '1';
+        vf        <= '0';
         mi        <= "11";
         liga_tmp  <= "ZZZZ";
         salidas_t <= "010001";
@@ -107,7 +107,7 @@ begin
         salidas_f <= "100000";
       when "1001" => -- E9
         prueba    <= "10";
-        vf        <= '1';
+        vf        <= '0';
         mi        <= "11";
         liga_tmp  <= "ZZZZ";
         salidas_t <= "101011";

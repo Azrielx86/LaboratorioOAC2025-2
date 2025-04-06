@@ -7,7 +7,6 @@ entity regint is
   port (
     vectb  : in std_logic; --! $\neg{vect}$
     in_dir : in std_logic_vector(3 downto 0); --! Only to the "simulation".
-    int    : in std_logic;
     dir    : out std_logic_vector(3 downto 0) --! Output direction.
   );
 end entity;
@@ -15,21 +14,14 @@ end entity;
 architecture arqregint of regint is
   signal next_dir : std_logic_vector(3 downto 0) := "0000";
 begin
-  process (in_dir, vectb, int)
+  process (in_dir, vectb)
   begin
     if vectb = '1' then
       if in_dir = "0111" then -- 7
-        if int = '1' then
-          next_dir <= "0111";
-        else
-          next_dir <= "1000";
-        end if;
+        next_dir <= "0111";
+
       elsif in_dir = "1001" then -- 9
-        if int = '1' then
-          next_dir <= "1001";
-        else
-          next_dir <= "1010";
-        end if;
+        next_dir <= "1001";
       else
         next_dir <= "0000";
       end if;
