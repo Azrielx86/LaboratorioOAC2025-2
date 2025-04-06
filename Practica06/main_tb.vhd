@@ -11,11 +11,12 @@ architecture bench of main_tb is
   -- constant clk_period : time := 5 ns;
   -- Generics
   -- Ports
-  signal clk     : std_logic;
-  signal reset   : std_logic;
-  signal inputs  : std_logic_vector(2 downto 0);
-  signal outputs : std_logic_vector(5 downto 0);
-  signal estados : std_logic_vector(3 downto 0);
+  signal clk        : std_logic;
+  signal reset      : std_logic;
+  signal inputs     : std_logic_vector(2 downto 0);
+  signal map_inputs : std_logic_vector(1 downto 0);
+  signal outputs    : std_logic_vector(5 downto 0);
+  signal estados    : std_logic_vector(3 downto 0);
 
   signal direccion : std_logic_vector(3 downto 0) := "0000"; --! aka Y
   signal prueba    : std_logic_vector(1 downto 0) := "00";
@@ -66,6 +67,7 @@ begin
     (
       mapb   => mapb,
       in_dir => direccion,
+      map_inputs => map_inputs,
       dir    => buffer_dir
     );
 

@@ -4,10 +4,11 @@ use ieee.numeric_std.all;
 use ieee.math_real.all;
 entity main is
   port (
-    clk     : in std_logic;
-    reset   : in std_logic;
-    inputs  : in std_logic_vector(2 downto 0);
-    outputs : out std_logic_vector(5 downto 0);
+    clk        : in std_logic;
+    reset      : in std_logic;
+    inputs     : in std_logic_vector(2 downto 0);
+    map_inputs : in std_logic_vector(1 downto 0);
+    outputs    : out std_logic_vector(5 downto 0);
     -- estados : out std_logic_vector(3 downto 0)
     display1 : out std_logic_vector(6 downto 0);
     display2 : out std_logic_vector(6 downto 0)
@@ -91,9 +92,10 @@ begin
   regmap_inst : entity work.regmap
     port map
     (
-      mapb   => mapb,
-      in_dir => direccion,
-      dir    => buffer_dir
+      mapb       => mapb,
+      in_dir     => direccion,
+      map_inputs => map_inputs,
+      dir        => buffer_dir
     );
 
   regint_inst : entity work.regint
@@ -123,21 +125,21 @@ begin
       vectb    => vectb
     );
 
-    process (qsel, vf)
-    begin
-      cc <= qsel xor vf;
-    end process;
-  
-    process (cc, salidas_f, salidas_t)
-    begin
-      if cc = '1' then
-        outputs <= salidas_f;
-      else
-        outputs <= salidas_t;
-      end if;
-    end process;
-  
-    x   <= inputs(0);
-    y   <= inputs(1);
-    int <= inputs(2);
+  process (qsel, vf)
+  begin
+    cc <= qsel xor vf;
+  end process;
+
+  process (cc, salidas_f, salidas_t)
+  begin
+    if cc = '1' then
+      outputs <= salidas_f;
+    else
+      outputs <= salidas_t;
+    end if;
+  end process;
+
+  x   <= inputs(0);
+  y   <= inputs(1);
+  int <= inputs(2);
 end arqmain;
