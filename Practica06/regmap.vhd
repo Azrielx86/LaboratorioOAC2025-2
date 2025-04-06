@@ -19,13 +19,13 @@ architecture arqregmap of regmap is
   signal branch_state11 : reg_array := (0 => "1100", 1 => "1101", 2 => "1110");
 begin
   process (in_dir, branch_state11, branch_state4, mapb)
-    variable idx : integer := 0;
+    variable idx : integer range 0 to 2 := 0;
   begin
     if mapb = '1' then
       if in_dir = "0100" then -- dir 4
         next_dir <= branch_state4(idx);
         idx := (idx + 1) mod 3;
-      elsif in_dir = "1100" then -- dir 11
+      elsif in_dir = "1011" then -- dir 11
         next_dir <= branch_state11(idx);
         idx := (idx + 1) mod 3;
       else

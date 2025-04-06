@@ -1,19 +1,22 @@
+
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
-use ieee.math_real.all;
-entity main is
-  port (
-    clk     : in std_logic;
-    reset   : in std_logic;
-    inputs  : in std_logic_vector(2 downto 0);
-    outputs : out std_logic_vector(5 downto 0);
-    estados : out std_logic_vector(3 downto 0)
-  );
-end main;
 
-architecture arqmain of main is
-  signal clk_low   : std_logic                    := '0';
+entity main_tb is
+end;
+
+architecture bench of main_tb is
+  -- Clock period
+  -- constant clk_period : time := 5 ns;
+  -- Generics
+  -- Ports
+  signal clk     : std_logic;
+  signal reset   : std_logic;
+  signal inputs  : std_logic_vector(2 downto 0);
+  signal outputs : std_logic_vector(5 downto 0);
+  signal estados : std_logic_vector(3 downto 0);
+
   signal direccion : std_logic_vector(3 downto 0) := "0000"; --! aka Y
   signal prueba    : std_logic_vector(1 downto 0) := "00";
   signal mi        : std_logic_vector(1 downto 0) := "00";
@@ -34,13 +37,7 @@ architecture arqmain of main is
   signal int  : std_logic := '0';
   signal qsel : std_logic := '0';
 begin
-  -- clk_low <= clk;
-  divisor_inst : entity work.divisor
-    port map
-    (
-      clk     => clk,
-      div_clk => clk_low
-    );
+
   memory_inst : entity work.memory
     port map
     (
@@ -88,7 +85,7 @@ begin
     -- )
     port map
     (
-      clk      => clk_low,
+      clk      => clk,
       reset    => reset,
       cc       => cc,
       dir      => buffer_dir,
@@ -121,4 +118,29 @@ begin
   x   <= inputs(0);
   y   <= inputs(1);
   int <= inputs(2);
-end arqmain;
+
+  process
+  begin
+    reset  <= '0';
+    inputs <= "000";
+    wait for 20 ps;
+    reset <= '1';
+    wait for 3 ps;
+    inputs <= "001";
+    wait for 30 ps;
+    inputs <= "010";
+    wait;
+  end process;
+
+  process
+  begin
+    while now < 500 ms loop
+      clk <= '0';
+      wait for 1 ps;
+      clk <= '1';
+      wait for 1 ps;
+    end loop;
+    wait;
+  end process;
+
+end;

@@ -4,17 +4,17 @@ use IEEE.STD_LOGIC_ARITH.all;
 use IEEE.STD_LOGIC_UNSIGNED.all;
 
 entity secuenciador is
-  generic (
-    dir_size    : integer := 3;
-    default_dir : std_logic_vector := "0000"
-  );
+  -- generic (
+  --   dir_size    : integer          := 3;
+  --   default_dir : std_logic_vector := "0000"
+  -- );
   port (
     clk      : in std_logic;
     reset    : in std_logic;
     cc       : in std_logic;
-    dir      : in std_logic_vector(dir_size downto 0);
-    next_dir : out std_logic_vector(dir_size downto 0);
+    dir      : in std_logic_vector(3 downto 0);
     i_ctrl   : in std_logic_vector(1 downto 0);
+    next_dir : out std_logic_vector(3 downto 0);
     plb      : out std_logic;
     mapb     : out std_logic;
     vectb    : out std_logic
@@ -22,33 +22,34 @@ entity secuenciador is
 end entity;
 
 architecture seq_arch of secuenciador is
-  signal selector   : std_logic := '0';
-  signal tmp_pl     : std_logic := '0';
-  signal tmp_map    : std_logic := '0';
-  signal tmp_vect   : std_logic := '0';
-  signal edo_actual : std_logic_vector(dir_size downto 0);
-  signal reg_upc : std_logic_vector(dir_size downto 0);
-  signal inc : std_logic_vector(dir_size downto 0);
+  signal selector : std_logic                    := '0';
+  signal tmp_pl   : std_logic                    := '0';
+  signal tmp_map  : std_logic                    := '0';
+  signal tmp_vect : std_logic                    := '0';
+  signal dir_y    : std_logic_vector(3 downto 0) := "0000";
+  signal edo_pres : std_logic_vector(3 downto 0) := "0000";
+  signal icc      : std_logic_vector(2 downto 0) := "000";
+
 begin
+
   process (clk, reset)
   begin
-    if rising_edge(clk) then
-      if reset = '0' then
-        reg_upc <= default_dir;
+    if reset = '0' then
+      edo_pres <= "0000";
+    elsif rising_edge(clk) then
+      if selector = '0' then
+        dir_y <= edo_pres + 1;
+        edo_pres <= edo_pres + 1;
       else
-        reg_upc <= inc;
+        edo_pres <= dir;
+        dir_y <= dir;
       end if;
     end if;
   end process;
 
-  process (edo_actual)
+  logica_interna : process (icc)
   begin
-    inc <= edo_actual + 1;
-  end process;
-
-  logica_interna : process (cc, i_ctrl)
-  begin
-    case i_ctrl & not cc is
+    case icc is
         -- Paso contiguo
       when "000" =>
         selector <= '0';
@@ -102,16 +103,8 @@ begin
     end case;
   end process;
 
-  mux : process (selector, dir, reg_upc)
-  begin
-    if selector = '0' then
-      edo_actual <= reg_upc;
-    else
-      edo_actual <= dir;
-    end if;
-  end process;
-
-  next_dir <= edo_actual;
+  icc      <= i_ctrl & not cc;
+  next_dir <= dir_y;
   plb      <= not tmp_pl;
   mapb     <= not tmp_map;
   vectb    <= not tmp_vect;
