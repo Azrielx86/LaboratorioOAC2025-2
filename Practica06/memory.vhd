@@ -82,8 +82,8 @@ begin
         vf        <= '0';
         mi        <= "01";
         liga_tmp  <= "0000";
-        salidas_t <= "010000";
-        salidas_f <= "010000";
+        salidas_t <= "110010";
+        salidas_f <= "010010";
       when "0110" => -- E6
         prueba    <= "11";
         vf        <= '1';
@@ -96,7 +96,7 @@ begin
         vf        <= '1';
         mi        <= "11";
         liga_tmp  <= "ZZZZ";
-        salidas_t <= "110000";
+        salidas_t <= "010001";
         salidas_f <= "010000";
       when "1000" => -- E8
         prueba    <= "11";

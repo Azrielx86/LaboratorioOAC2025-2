@@ -8,7 +8,9 @@ entity main is
     reset   : in std_logic;
     inputs  : in std_logic_vector(2 downto 0);
     outputs : out std_logic_vector(5 downto 0);
-    estados : out std_logic_vector(3 downto 0)
+    -- estados : out std_logic_vector(3 downto 0)
+    display1 : out std_logic_vector(6 downto 0);
+    display2 : out std_logic_vector(6 downto 0)
   );
 end main;
 
@@ -33,14 +35,36 @@ architecture arqmain of main is
   signal y    : std_logic := '0';
   signal int  : std_logic := '0';
   signal qsel : std_logic := '0';
+
+  -- Display
+  signal est_int    : integer := 0;
+  signal bin_digits : std_logic_vector(27 downto 0);
 begin
   -- clk_low <= clk;
+
+  est_int <= to_integer(unsigned(direccion));
+
   divisor_inst : entity work.divisor
     port map
     (
       clk     => clk,
       div_clk => clk_low
     );
+
+  bcd2ss7_inst : entity work.bcd2ss7
+    port map
+    (
+      number => est_int,
+      digits => bin_digits
+    );
+
+  digit1 : entity work.display
+    port map
+      (bin_digits(3 downto 0), display1);
+  digit2 : entity work.display
+    port map
+      (bin_digits(7 downto 4), display2);
+
   memory_inst : entity work.memory
     port map
     (
@@ -77,7 +101,7 @@ begin
     (
       vectb  => vectb,
       in_dir => direccion,
-      int    => qsel,
+      int    => int,
       dir    => buffer_dir
     );
 
@@ -99,26 +123,21 @@ begin
       vectb    => vectb
     );
 
-  process (qsel, vf)
-  begin
-    cc <= qsel xor vf;
-  end process;
-
-  process (cc, salidas_f, salidas_t)
-  begin
-    if cc = '1' then
-      outputs <= salidas_f;
-    else
-      outputs <= salidas_t;
-    end if;
-  end process;
-
-  process (direccion)
-  begin
-    estados <= direccion;
-  end process;
-
-  x   <= inputs(0);
-  y   <= inputs(1);
-  int <= inputs(2);
+    process (qsel, vf)
+    begin
+      cc <= qsel xor vf;
+    end process;
+  
+    process (cc, salidas_f, salidas_t)
+    begin
+      if cc = '1' then
+        outputs <= salidas_f;
+      else
+        outputs <= salidas_t;
+      end if;
+    end process;
+  
+    x   <= inputs(0);
+    y   <= inputs(1);
+    int <= inputs(2);
 end arqmain;
