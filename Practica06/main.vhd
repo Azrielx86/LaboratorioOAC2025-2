@@ -7,9 +7,7 @@ entity main is
     clk        : in std_logic;
     reset      : in std_logic;
     inputs     : in std_logic_vector(2 downto 0);
-    map_inputs : in std_logic_vector(1 downto 0);
     outputs    : out std_logic_vector(5 downto 0);
-    -- estados : out std_logic_vector(3 downto 0)
     display1 : out std_logic_vector(6 downto 0);
     display2 : out std_logic_vector(6 downto 0)
   );
