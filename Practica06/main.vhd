@@ -92,6 +92,8 @@ begin
   regmap_inst : entity work.regmap
     port map
     (
+      clk        => clk_low,
+      rst        => reset,
       mapb       => mapb,
       in_dir     => direccion,
       map_inputs => map_inputs,

@@ -65,10 +65,12 @@ begin
   regmap_inst : entity work.regmap
     port map
     (
-      mapb   => mapb,
-      in_dir => direccion,
+      clk        => clk,
+      rst        => reset,
+      mapb       => mapb,
+      in_dir     => direccion,
       map_inputs => map_inputs,
-      dir    => buffer_dir
+      dir        => buffer_dir
     );
 
   regint_inst : entity work.regint
@@ -118,15 +120,15 @@ begin
 
   process
   begin
-    reset  <= '0';
-    inputs <= "100";
+    reset      <= '0';
+    inputs     <= "100";
     map_inputs <= "00";
     wait for 20 ps;
     reset <= '1';
     wait for 3 ps;
-    inputs <= "101";
+    inputs <= "011";
     wait for 30 ps;
-    inputs <= "110";
+    inputs <= "011";
     wait;
   end process;
 

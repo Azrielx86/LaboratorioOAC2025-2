@@ -16,7 +16,7 @@ begin
     variable cuenta : std_logic_vector (27 downto 0) := X"0000000";
   begin
     if rising_edge (clk) then
-      if cuenta = X"4000000" then
+      if cuenta = X"2000000" then
         cuenta := X"0000000";
       else
         cuenta := cuenta + 1;
