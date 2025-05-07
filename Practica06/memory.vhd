@@ -51,7 +51,7 @@ begin
         salidas_f <= "000001";
       when "0001" => -- E01 Salto condicional - 01, n+1 con 0
         prueba    <= "00";
-        vf        <= '1';
+        vf        <= '0';
         mi        <= "01";
         liga_tmp  <= "0111"; -- E7
         salidas_t <= "011111";

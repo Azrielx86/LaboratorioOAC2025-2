@@ -8,7 +8,6 @@ entity regmap is
     rst        : in std_logic;
     mapb       : in std_logic; --! $\neg{map}$
     in_dir     : in std_logic_vector(3 downto 0); --! Only to the "simulation".
-    map_inputs : in std_logic_vector(1 downto 0);
     dir        : out std_logic_vector(3 downto 0) --! Output direction.
   );
 end entity;
@@ -19,7 +18,7 @@ architecture arqregmap of regmap is
   signal inc_b    : std_logic_vector(1 downto 0) := "00";
 begin
 
-  process (clk, in_dir)
+  process (clk, rst, in_dir)
     variable tmp_a : std_logic_vector(1 downto 0) := "00";
     variable tmp_b : std_logic_vector(1 downto 0) := "00";
   begin

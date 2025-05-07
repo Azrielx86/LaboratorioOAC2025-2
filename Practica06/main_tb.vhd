@@ -69,7 +69,6 @@ begin
       rst        => reset,
       mapb       => mapb,
       in_dir     => direccion,
-      map_inputs => map_inputs,
       dir        => buffer_dir
     );
 
